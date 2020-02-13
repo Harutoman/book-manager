@@ -87,6 +87,6 @@ class CsvImportController extends Controller
       }
       $row_count++;
     }
-    return redirect()->route('')
+    return redirect()->route('');
   }
 }
