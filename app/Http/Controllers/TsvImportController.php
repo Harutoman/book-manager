@@ -11,7 +11,7 @@ use App\Book;
 use Auth;
 use Log;
 
-class CsvImportController extends Controller
+class TsvImportController extends Controller
 {
   public function store(Request $request)
   {
@@ -19,11 +19,11 @@ class CsvImportController extends Controller
     setlocale(LC_ALL, 'ja_JP.UTF-8');
 
     // アップロードしたファイルを取得
-    // 'csv_file' はCSVファイルインポート画面の inputタグのname属性
-    $uploaded_file = $request->file('csv_file');
+    // 'tsv_file' はTSVファイルインポート画面の inputタグのname属性
+    $uploaded_file = $request->file('tsv_file');
 
     // アップロードしたファイルの絶対パスを取得
-    $file_path = $request->file('csv_file')->path($uploaded_file);
+    $file_path = $request->file('tsv_file')->path($uploaded_file);
 
     $file = new SplFileObject($file_path);
     $file->setFlags(SplFileObject::READ_CSV);
@@ -87,6 +87,6 @@ class CsvImportController extends Controller
       }
       $row_count++;
     }
-    return redirect()->route('');
+    return redirect()->route('/import');
   }
 }
