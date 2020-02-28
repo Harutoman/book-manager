@@ -6,8 +6,11 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        <ul>
+                            <li v-for="(book,index) in books" v-bind:key="index">{{ book.title }}</li>
+                        </ul>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -16,8 +19,13 @@
 
 <script>
     export default {
+        data(){
+            return {
+                books: []
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+          axios.get('/book/data').then(response => this.books= response.data)
         }
     }
 </script>

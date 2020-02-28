@@ -23,4 +23,12 @@ Route::get('/import', function () {
   return view('import');
 });
 
+Route::get('/book/list', function () {
+  return view('book.list');
+});
+
+Route::get('/book/data',function(){
+	return App\Book::all();
+});
+
 Route::post('import/import-csv', 'CsvImportController@store');
