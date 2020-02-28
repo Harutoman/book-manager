@@ -31,4 +31,4 @@ Route::get('/book/data',function(){
 	return App\Book::all();
 });
 
-Route::post('import/import-csv', 'CsvImportController@store');
+Route::post('import/import-tsv', 'TsvImportController@store');
