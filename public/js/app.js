@@ -18410,18 +18410,76 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'App',
   data: function data() {
     return {
-      books: []
+      keyword: '',
+      inset: "",
+      page: 1,
+      pageNumber: [],
+      books: [],
+      length: 0,
+      displaybooks: [],
+      pageSize: 50
     };
+  },
+  methods: {
+    pageChange: function pageChange(pageNumber) {
+      this.displaybooks = this.filteredbooks.slice(this.pageSize * (pageNumber - 1), this.pageSize * pageNumber); // this.length       = Math.ceil(this.filteredbooks.length / this.pageSize);
+
+      return this.displaybook;
+    }
   },
   mounted: function mounted() {
     var _this = this;
 
     axios.get('/book/data').then(function (response) {
-      return _this.books = response.data;
+      _this.books = response.data;
+      _this.displaybooks = _this.books.slice(0, _this.pageSize);
+      _this.length = Math.ceil(_this.books.length / _this.pageSize);
     });
+  },
+  computed: {
+    filteredbooks: function filteredbooks() {
+      var books = [];
+
+      for (var i in this.books) {
+        var book = this.books[i];
+
+        if (book.title.indexOf(this.keyword) !== -1 || book.author.indexOf(this.keyword) !== -1 || book.publisher.indexOf(this.keyword) !== -1) {
+          books.push(book);
+        }
+      }
+
+      this.displaybooks = books.slice(0, this.pageSize);
+      return this.displaybooks, books;
+    }
   }
 });
 
@@ -54417,12 +54475,32 @@ var render = function() {
     { staticClass: "mx-auto", attrs: { "max-width": "1500px" } },
     [
       _c(
+        "v-col",
+        { attrs: { cols: "12", md: "7" } },
+        [
+          _c("v-text-field", {
+            staticClass: "pt-4 pl-5",
+            attrs: { label: "タイトル・作者名・出版社を検索できます！" },
+            on: { input: _vm.pageChange },
+            model: {
+              value: _vm.keyword,
+              callback: function($$v) {
+                _vm.keyword = $$v
+              },
+              expression: "keyword"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "v-layout",
         { attrs: { row: "", wrap: "" } },
-        _vm._l(_vm.books, function(book, index) {
+        _vm._l(_vm.displaybooks, function(book) {
           return _c(
             "v-flex",
-            { key: index },
+            { key: book.index },
             [
               _c(
                 "v-card",
@@ -54457,8 +54535,19 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "pl-2" }, [_vm._v("作者名")]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "pl-2 pb-2" }, [
+                  _c("div", { staticClass: "pl-2" }, [
                     _vm._v(_vm._s(book.author))
+                  ]),
+                  _vm._v(" "),
+                  _c("v-divider", {
+                    staticClass: "mt-2 mb-2",
+                    attrs: { inset: _vm.inset }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "pl-2" }, [_vm._v("出版社")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "pl-2 pb-2" }, [
+                    _vm._v(_vm._s(book.publisher))
                   ])
                 ],
                 1
@@ -54468,7 +54557,28 @@ var render = function() {
           )
         }),
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("v-content", [
+        _c(
+          "div",
+          { staticClass: "text-center" },
+          [
+            _c("v-pagination", {
+              attrs: { length: _vm.length },
+              on: { input: _vm.pageChange },
+              model: {
+                value: _vm.page,
+                callback: function($$v) {
+                  _vm.page = $$v
+                },
+                expression: "page"
+              }
+            })
+          ],
+          1
+        )
+      ])
     ],
     1
   )
