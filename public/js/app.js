@@ -18450,22 +18450,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    pageChange: function pageChange(pageNumber) {
-      this.displaybooks = this.filteredbooks.slice(this.pageSize * (pageNumber - 1), this.pageSize * pageNumber); // this.length       = Math.ceil(this.filteredbooks.length / this.pageSize);
-
-      return this.displaybook;
-    }
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/book/data').then(function (response) {
-      _this.books = response.data;
-      _this.displaybooks = _this.books.slice(0, _this.pageSize);
-      _this.length = Math.ceil(_this.books.length / _this.pageSize);
-    });
-  },
-  computed: {
     filteredbooks: function filteredbooks() {
       var books = [];
 
@@ -18478,8 +18462,27 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.displaybooks = books.slice(0, this.pageSize);
-      return this.displaybooks, books;
+      this.length = Math.ceil(books.length / this.pageSize);
+      this.searchbooks = books;
+    },
+    pageChange: function pageChange(pageNumber) {
+      if (typeof this.searchbooks == "undefined") {
+        this.displaybooks = this.books.slice(this.pageSize * (pageNumber - 1), this.pageSize * pageNumber);
+        this.length = Math.ceil(this.books.length / this.pageSize);
+      } else {
+        this.displaybooks = this.searchbooks.slice(this.pageSize * (pageNumber - 1), this.pageSize * pageNumber);
+        this.length = Math.ceil(this.searchbooks.length / this.pageSize);
+      }
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/book/data').then(function (response) {
+      _this.books = response.data;
+      _this.displaybooks = _this.books.slice(0, _this.pageSize);
+      _this.length = Math.ceil(_this.books.length / _this.pageSize);
+    });
   }
 });
 
@@ -54481,7 +54484,7 @@ var render = function() {
           _c("v-text-field", {
             staticClass: "pt-4 pl-5",
             attrs: { label: "タイトル・作者名・出版社を検索できます！" },
-            on: { input: _vm.pageChange },
+            on: { input: _vm.filteredbooks },
             model: {
               value: _vm.keyword,
               callback: function($$v) {
