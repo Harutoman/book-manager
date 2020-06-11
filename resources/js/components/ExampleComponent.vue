@@ -5,7 +5,7 @@
         class   = "pt-4 pl-5"
         v-model = "keyword" 
         label   = "タイトル・作者名・出版社を検索できます！"
-        @input  = "pageChange"
+        @input  = "filteredbooks"
       ></v-text-field>
     </v-col>
     <v-layout row wrap>
@@ -57,20 +57,6 @@
       }
     },  
     methods: {
-      pageChange: function(pageNumber){
-        this.displaybooks = this.filteredbooks.slice(this.pageSize*(pageNumber -1), this.pageSize*(pageNumber));
-        // this.length       = Math.ceil(this.filteredbooks.length / this.pageSize);
-        return this.displaybook;
-      },
-    },
-    mounted() {
-      axios.get('/book/data').then(response => {
-        this.books        = response.data
-        this.displaybooks = this.books.slice(0, this.pageSize);
-        this.length       = Math.ceil(this.books.length / this.pageSize);
-      });
-    },
-    computed: {
       filteredbooks: function() {
         var books = [];
         for(var i in this.books) {
@@ -82,8 +68,25 @@
           }
         }
         this.displaybooks = books.slice(0, this.pageSize);
-        return this.displaybooks, books;
+        this.length       = Math.ceil(books.length / this.pageSize);
+        this.searchbooks  = books;
       },
-    }
+      pageChange: function(pageNumber) {
+        if (typeof this.searchbooks == "undefined") {
+          this.displaybooks = this.books.slice(this.pageSize * (pageNumber -1), this.pageSize * (pageNumber));
+          this.length       = Math.ceil(this.books.length / this.pageSize);        
+        } else {
+          this.displaybooks = this.searchbooks.slice(this.pageSize * (pageNumber -1), this.pageSize * (pageNumber));
+          this.length       = Math.ceil(this.searchbooks.length / this.pageSize);
+        }
+      }
+    },
+    mounted() {
+      axios.get('/book/data').then(response => {
+        this.books        = response.data
+        this.displaybooks = this.books.slice(0, this.pageSize);
+        this.length       = Math.ceil(this.books.length / this.pageSize);
+      });
+    },
   }
 </script>
