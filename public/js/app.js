@@ -18435,6 +18435,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   data: function data() {
@@ -54498,67 +54501,74 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
-        _vm._l(_vm.displaybooks, function(book) {
-          return _c(
-            "v-flex",
-            { key: book.index },
-            [
-              _c(
-                "v-card",
-                {
-                  staticClass: "grey lighten-3 pt-2 m-4",
-                  attrs: { width: "200px", height: "90%" }
-                },
+        "v-container",
+        { attrs: { fluid: "", "grid-list-xl": "" } },
+        [
+          _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "", "justify-space-around": "" } },
+            _vm._l(_vm.displaybooks, function(book) {
+              return _c(
+                "v-flex",
+                { key: book.index },
                 [
-                  _c("v-img", {
-                    attrs: {
-                      src: __webpack_require__("./image sync recursive ^\\.\\/.*\\.png$")("./" + book.id + ".png"),
-                      "aspect-ratio": "1.1",
-                      contain: ""
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("v-divider", {
-                    staticClass: "mt-2 mb-2",
-                    attrs: { inset: _vm.inset }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "pl-2" }, [_vm._v("タイトル")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "pl-2" }, [
-                    _vm._v(_vm._s(book.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("v-divider", {
-                    staticClass: "mt-2 mb-2",
-                    attrs: { inset: _vm.inset }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "pl-2" }, [_vm._v("作者名")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "pl-2" }, [
-                    _vm._v(_vm._s(book.author))
-                  ]),
-                  _vm._v(" "),
-                  _c("v-divider", {
-                    staticClass: "mt-2 mb-2",
-                    attrs: { inset: _vm.inset }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "pl-2" }, [_vm._v("出版社")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "pl-2 pb-2" }, [
-                    _vm._v(_vm._s(book.publisher))
-                  ])
+                  _c(
+                    "v-card",
+                    {
+                      staticClass: "grey lighten-3 pt-2 m-4",
+                      attrs: { width: "200px", height: "90%" }
+                    },
+                    [
+                      _c("v-img", {
+                        attrs: {
+                          src: __webpack_require__("./image sync recursive ^\\.\\/.*\\.png$")("./" + book.id + ".png"),
+                          "aspect-ratio": "1.1",
+                          contain: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-divider", {
+                        staticClass: "mt-2 mb-2",
+                        attrs: { inset: _vm.inset }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "pl-2" }, [_vm._v("タイトル")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "pl-2" }, [
+                        _vm._v(_vm._s(book.title))
+                      ]),
+                      _vm._v(" "),
+                      _c("v-divider", {
+                        staticClass: "mt-2 mb-2",
+                        attrs: { inset: _vm.inset }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "pl-2" }, [_vm._v("作者名")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "pl-2" }, [
+                        _vm._v(_vm._s(book.author))
+                      ]),
+                      _vm._v(" "),
+                      _c("v-divider", {
+                        staticClass: "mt-2 mb-2",
+                        attrs: { inset: _vm.inset }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "pl-2" }, [_vm._v("出版社")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "pl-2 pb-2" }, [
+                        _vm._v(_vm._s(book.publisher))
+                      ])
+                    ],
+                    1
+                  )
                 ],
                 1
               )
-            ],
+            }),
             1
           )
-        }),
+        ],
         1
       ),
       _vm._v(" "),
