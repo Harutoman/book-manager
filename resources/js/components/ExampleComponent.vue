@@ -82,11 +82,22 @@
           this.displaybooks = this.searchbooks.slice(this.pageSize * (pageNumber -1), this.pageSize * (pageNumber));
           this.length       = Math.ceil(this.searchbooks.length / this.pageSize);
         }
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
       }
     },
     mounted() {
       axios.get('/book/data').then(response => {
-        this.books        = response.data
+        this.books = response.data
+        this.books.sort(function(a,b){
+          if(a.title < b.title) return -1;
+          if(a.title > b.title) return 1;
+          return 0;
+        });
+
         this.displaybooks = this.books.slice(0, this.pageSize);
         this.length       = Math.ceil(this.books.length / this.pageSize);
       });

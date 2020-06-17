@@ -18476,6 +18476,11 @@ __webpack_require__.r(__webpack_exports__);
         this.displaybooks = this.searchbooks.slice(this.pageSize * (pageNumber - 1), this.pageSize * pageNumber);
         this.length = Math.ceil(this.searchbooks.length / this.pageSize);
       }
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     }
   },
   mounted: function mounted() {
@@ -18483,6 +18488,13 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('/book/data').then(function (response) {
       _this.books = response.data;
+
+      _this.books.sort(function (a, b) {
+        if (a.title < b.title) return -1;
+        if (a.title > b.title) return 1;
+        return 0;
+      });
+
       _this.displaybooks = _this.books.slice(0, _this.pageSize);
       _this.length = Math.ceil(_this.books.length / _this.pageSize);
     });
