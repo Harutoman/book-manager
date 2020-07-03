@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-  return view('welcome');
-});
+Route::redirect('/', '/book/list');
+
+Route::redirect('/home', '/book/list');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/import', function () {
   return view('import');
