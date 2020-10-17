@@ -20,14 +20,19 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('book-list', require('./components/book-list.vue').default);
+Vue.component('side-bar', require('./components/side-bar.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+import Vue from 'vue'
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
+
+
 Vue.use(Vuetify);
 
 const app = new Vue({
