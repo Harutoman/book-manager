@@ -60,6 +60,7 @@
       }
     },  
     methods: {
+      // 書籍の検索処理部分
       filteredbooks: function() {
         var books = [];
         for(var i in this.books) {
@@ -74,6 +75,8 @@
         this.length       = Math.ceil(books.length / this.pageSize);
         this.searchbooks  = books;
       },
+
+      // ページネーションボタン押下時の処理部分
       pageChange: function(pageNumber) {
         if (typeof this.searchbooks == "undefined") {
           this.displaybooks = this.books.slice(this.pageSize * (pageNumber -1), this.pageSize * (pageNumber));
@@ -90,6 +93,7 @@
       }
     },
     mounted() {
+      // 書籍データの取得処理部分
       axios.get('/book/data').then(response => {
         this.books = response.data
         this.books.sort(function(a,b){
