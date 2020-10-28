@@ -18,8 +18,8 @@ Route::redirect('/home', '/book/list');
 Auth::routes();
 
 
-Route::get('/import', function () {
-  return view('import');
+Route::get('/book/import', function () {
+  return view('book.import');
 });
 
 Route::get('/book/list', function () {
