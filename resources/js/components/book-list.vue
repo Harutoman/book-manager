@@ -13,7 +13,7 @@
       <v-layout row wrap justify-space-around>
         <v-flex v-for="book in displaybooks" :key="book.index">
           <v-card class="grey lighten-3 pt-2 m-4" width="200px" height="90%">
-            <v-img :src= "require('../../../image/' + book.id + '.png')" aspect-ratio="1.1" contain/>
+            <v-img :src= "require('../../../public/images/' + book.id + '.png')" aspect-ratio="1.1" contain/>
 
             <v-divider class="mt-2 mb-2" :inset="inset"></v-divider>
             <div class="pl-2">タイトル</div>
