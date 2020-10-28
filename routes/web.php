@@ -32,7 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/book/data',function(){
     return App\Book::all();
   });
-  Route::post('import/import-tsv', 'TsvImportController@store');
+
+  Route::post('/book/import/import-tsv', 'TsvImportController@store');
 });
 
 
