@@ -1464,7 +1464,8 @@ var map = {
 	"./996.png": "./image/996.png",
 	"./997.png": "./image/997.png",
 	"./998.png": "./image/998.png",
-	"./999.png": "./image/999.png"
+	"./999.png": "./image/999.png",
+	"./サンプル画像1.png": "./image/サンプル画像1.png"
 };
 
 
@@ -16567,6 +16568,17 @@ module.exports = "/images/998.png?28b00b8337eda96eef47f6c6b3ec5a77";
 /***/ (function(module, exports) {
 
 module.exports = "/images/999.png?b3213a32a411188c8b44a4e6e47f39c3";
+
+/***/ }),
+
+/***/ "./image/サンプル画像1.png":
+/*!***************************!*\
+  !*** ./image/サンプル画像1.png ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/サンプル画像1.png?759260fb94b03d11968204018797003e";
 
 /***/ }),
 
