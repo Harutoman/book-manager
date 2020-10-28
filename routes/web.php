@@ -13,22 +13,27 @@
 
 Route::redirect('/', '/home');
 
-Auth::routes();
-
 Route::get('/home', function () {
   return view('home');
 });
 
-Route::get('/book/import', function () {
-  return view('book.import');
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function () {
+  // 認証処理後に表示させたいページ
+  Route::get('/book/import', function () {
+    return view('book.import');
+  });
+  
+  Route::get('/book/list', function () {
+    return view('book.list');
+  });
+  
+  Route::get('/book/data',function(){
+    return App\Book::all();
+  });
+  Route::post('import/import-tsv', 'TsvImportController@store');
 });
 
-Route::get('/book/list', function () {
-  return view('book.list');
-});
 
-Route::get('/book/data',function(){
-	return App\Book::all();
-});
 
-Route::post('import/import-tsv', 'TsvImportController@store');
