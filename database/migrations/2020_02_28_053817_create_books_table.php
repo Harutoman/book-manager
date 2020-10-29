@@ -16,7 +16,7 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('parent_id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title')->nullable();
             $table->string('title_kana')->nullable();
             $table->string('subtitle')->nullable();
